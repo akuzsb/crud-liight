@@ -4,12 +4,12 @@
 		<form @submit.prevent="login">
 			<div class="form-group">
 				<label>Email:</label>
-				<input type="email" v-model="email" required>
+				<input type="email" v-model="dataForm.email" required>
 			</div>
 
 			<div class="form-group">
 				<label>Password:</label>
-				<input type="password" v-model="password" required>
+				<input type="password" v-model="dataForm.password" required>
 			</div>
 
 			<ErrorMessage v-if="errorMessage" :message="errorMessage" />
@@ -29,8 +29,10 @@ import ErrorMessage from './ErrorMessage.vue'; // Importa el componente de mensa
 export default {
 	data() {
 		return {
-			email: 'augustosn24@gmail.com',
-			password: 'chichu',
+			dataForm: {
+				email: '',
+				password: ''
+			},
 			errorMessage: ''
 		};
 	},
@@ -40,10 +42,7 @@ export default {
 	methods: {
 		async login() {
 			try {
-				const response = await axiosFetch.post('/login', {
-					email: this.email,
-					password: this.password
-				});
+				const response = await axiosFetch.post('/login', this.dataForm);
 				const token = response.data.token;
 				localStorage.setItem('token', token);
 				this.$router.push('/users');
