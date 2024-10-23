@@ -1,0 +1,46 @@
+services:
+  backend:
+    build: ./back
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=development
+      - DB_HOST=mysql_db
+      - DB_USER=${DB_USER}
+      - DB_PASSWORD=${DB_PASSWORD}
+      - DB_NAME=${DB_NAME}
+      - DB_PORT=${DB_PORT}
+      - TZ=America/Argentina/Buenos_Aires
+      - SECRET_TOKEN=${SECRET_TOKEN}
+    depends_on:
+      - mysql_db
+    # que se reinicie si se cae, pero no si lo cancelo
+    restart: unless-stopped
+    volumes:
+      - ./back/src:/usr/src/app/src
+
+  frontend:
+    build: ./front
+    ports:
+      - "5173:5173"
+    environment:
+      - NODE_ENV=development
+    depends_on:
+      - backend
+    volumes:
+      - ./front/src:/usr/src/app/src
+
+  mysql_db:
+    image: mysql
+    ports:
+      - "3306:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=${DB_PASSWORD}
+      - MYSQL_DATABASE=${DB_NAME}
+      - MYSQL_ALLOW_EMPTY_PASSWORD=no
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./back/init.sql:/docker-entrypoint-initdb.d/init.sql
+
+volumes:
+  mysql_data:
