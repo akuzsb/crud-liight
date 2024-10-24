@@ -10,7 +10,7 @@ Para construir y levantar los contenedores de Docker, utiliza el siguiente coman
 ```sh
 docker compose up --build -d
 ```
-Una vez que los contenedores estén arriba, puedes acceder al frontend en la siguiente URL:
+Una vez que los contenedores estén funcionando, puedes acceder al frontend en la siguiente URL:
 
 http://localhost:5173
 
@@ -30,6 +30,15 @@ El primer login lo tiene que hacer con el siguiente usuario:
 
 - **Usuario:** augustosn24@gmail.com
 - **Clave:** chinchulin
+
+
+## Despliegue en Producción
+
+He desplegado el proyecto en una Raspberry Pi que tengo corriendo Docker y lo he publicado en la siguiente URL:
+
+http://asantillan.duckdns.org
+
+Puedes acceder a la aplicación completa y probar todas sus funcionalidades desde esta dirección.
 
 
 ¡Gracias por revisar mi prueba técnica!
