@@ -16,22 +16,25 @@ app.use('/api/login', loginRoutes);
 
 
 app.get('/', (req, res) => {
-	  res.send('Hello World!');
+	res.json({
+		'msg': 'Bienvenido a la API del crud liigth',
+		'autor': 'Augusto Santillan'
+	});
 });
 
 // manejo de rutas no encontradas
 app.use((req, res, next) => {
-	  res.status(404).json({ 'msg': 'Ruta no encontrada' });
+	res.status(404).json({ 'msg': 'Ruta no encontrada' });
 });
 // manejo de errores
 app.use((err, req, res, next) => {
-	  console.error(err.stack);
-	  res.status(500).json({
+	console.error(err.stack);
+	res.status(500).json({
 		'success': false,
 		'msg': 'Hubo un error en el servidor, por favor intente más tarde'
-	  })
+	})
 });
 
 app.listen(PORT, () => {
-	  console.log(`Server is running on port ${PORT}`);
+	console.log(`Server is running on port ${PORT}`);
 });
