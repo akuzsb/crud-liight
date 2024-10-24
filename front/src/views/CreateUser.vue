@@ -27,4 +27,12 @@ export default {
 	flex-direction: column;
 	padding: 20px;
 }
+
+.back-link {
+	color: #ccc;
+	padding: 8px 16px;
+	background-color: #202020;
+	border-radius: 5px;
+	margin: 8px 0;
+}
 </style>
